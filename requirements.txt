@@ -1,6 +1,4 @@
 flask
 requests
 pytest
-yamllint
 pylint
-black

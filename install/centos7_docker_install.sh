@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Copy/pasting the steps from docker's installation instructions
 # for CentOS 7.
 yum remove -y docker \

@@ -13,7 +13,7 @@ import requests
 # prevent more wireshark captures
 
 
-def test_get_page():
+def test_get_good_page():
     """
     Simulate a user navigating to the website with an HTTP GET.
     """
@@ -22,6 +22,19 @@ def test_get_page():
         resp = requests.get(f"http://localhost:{port}", headers=get_headers)
         assert resp.status_code == 200
         assert "Enter account ID" in resp.text
+
+
+def test_get_bad_page():
+    """
+    Simulate a user navigating to an invalid URL with an HTTP GET.
+    """
+    get_headers = {"Accept": "text/html"}
+    for port in [5001, 5002, 5003]:
+        resp = requests.get(
+            f"http://localhost:{port}/bad.html", headers=get_headers
+        )
+        assert resp.status_code == 404
+        assert "Not Found" in resp.text
 
 
 def test_post_good_acct():

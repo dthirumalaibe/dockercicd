@@ -11,7 +11,6 @@ RUN apk update && apk upgrade && \
     apk add --no-cache git && \
     git clone https://github.com/nickrusso42518/devasc1.git && \
     pip install flask
-#   pip install -r requirements.txt
 
 # Change into the correct directory. WORKDIR is the Docker best practice
 # versus "RUN cd /devasc1/m2/mvc" as it is cleaner and more explicit.
