@@ -1,5 +1,7 @@
 ---
 # Use a Python-based system in a 3.7 virtual environment.
+# Per Travis docs, xenial must be used for Python 3.7 or newer.
+dist: "xenial"
 language: "python"
 python:
   - "3.7"
