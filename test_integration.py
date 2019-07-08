@@ -26,24 +26,6 @@ def test_get_page():
 
 def test_post_good_acct():
     """
-    Simulate a user entering an account number and clicking "Submit".
-    """
-    data = "acctid=ACCT100"
-    post_headers = {
-        "Accept": "text/html",
-        "Content-Type": "application/x-www-form-urlencoded",
-    }
-
-    for port in [5001, 5002, 5003]:
-        resp = requests.post(
-            f"http://localhost:{port}", headers=post_headers, data=data
-        )
-        assert resp.status_code == 200
-        assert "Account balance: -40" in resp.text
-
-
-def test_post_good_acct():
-    """
     Simulate a user entering a valid account number and clicking "Submit".
     """
     _post_acct({"acctid": "ACCT100", "acctbal": -40})

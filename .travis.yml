@@ -1,0 +1,30 @@
+---
+# Use a Python-based system in a 3.7 virtual environment.
+language: "python"
+python:
+  - "3.7"
+
+# Need docker and docker-compose support.
+services:
+  - "docker"
+
+# Install required Python packages such as flask, pylint, and pytest.
+install:
+  - "pip install -r requirements.txt"
+
+# Execute the linting and unit tests before spinning up containers.
+# Once containers are up, print them out for logging purposes.
+before_script:
+  - "pylint *.py"
+  # - "pytest unit_tests.py"
+  - "docker-compose up -d"
+  - "docker ps"
+
+# Run the integration tests to ensure the web server is functional.
+script:
+  - "pytest integration_tests.py"
+
+# Not completely necessary, but gracefully tear down containers.
+after_script:
+  - "docker-compose down"
+...
