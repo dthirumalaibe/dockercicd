@@ -1,10 +1,11 @@
 ---
 # Like a docker "script", this file simplifies to composition
 # of docker-based apps by managing multiple containers on a given
-# host. This file is equivalent to manually typing these commands:
-#  docker container run -p 5001:5000/tcp <image_name>
-#  docker container run -p 5002:5000/tcp <image_name>
-#  docker container run -p 5003:5000/tcp <image_name>
+# host. This file is equivalent to manually typing this command,
+# once for each container, which is burdensome.
+#   docker container run \
+#     --publish 5001:5000/tcp \
+#     --mount type=bind,source="$(pwd)"/src,target=/src crm
 
 # Version 3.7 for compose files corresponds with
 # docker engine 18.06.0 and newer (per docker docs).
@@ -22,12 +23,24 @@ services:
     image: "crm:latest"
     ports:
       - "5001:5000/tcp"
+    volumes:
+      - type: "bind"
+        source: "./src"
+        target: "/src"
   crm2:
     image: "crm:latest"
     ports:
       - "5002:5000/tcp"
+    volumes:
+      - type: "bind"
+        source: "./src"
+        target: "/src"
   crm3:
     image: "crm:latest"
     ports:
       - "5003:5000/tcp"
+    volumes:
+      - type: "bind"
+        source: "./src"
+        target: "/src"
 ...

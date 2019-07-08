@@ -17,15 +17,15 @@ install:
 # Execute the linting and unit tests before spinning up containers.
 # Once containers are up, print them out for logging purposes.
 before_script:
-  - "pylint *.py"
-  # - "pytest test_unit.py"
+  - "pylint src/*.py"
+  - "pytest src/test_unit.py"
   - "docker-compose build"
   - "docker-compose up -d"
   - "docker ps"
 
 # Run the integration tests to ensure the web server is functional.
 script:
-  - "pytest test_integration.py"
+  - "pytest src/test_integration.py"
 
 # Not completely necessary, but gracefully tear down containers.
 after_script:
