@@ -17,16 +17,17 @@ version: "3.7"
 # view, and controller components for even better scaling
 # granularity. This is commonly done with professional software.
 services:
-  crm1:
+  crm:
     build: .
+    image: "crm:latest"
     ports:
       - "5001:5000/tcp"
   crm2:
-    build: .
+    image: "crm:latest"
     ports:
       - "5002:5000/tcp"
   crm3:
-    build: .
+    image: "crm:latest"
     ports:
       - "5003:5000/tcp"
 ...
