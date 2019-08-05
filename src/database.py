@@ -9,9 +9,8 @@ Purpose: A simple Flask web app that demonstrates the Model View Controller
 
 class Database:
     """
-    Represent the interface to the data (model). Can be statically defined
-    data, read from a simple file such as JSON, YAML, or XML, or a more
-    complex remote database including postgres and SQL-based options.
+    Represent the interface to the data (model). Can read from a
+    simple file such as JSON, YAML, or XML. Uses JSON by default.
     """
 
     def __init__(self, path):
@@ -24,7 +23,6 @@ class Database:
         # Open the specified database file for reading and perform loading
         with open(path, "r") as handle:
             import json
-
             self.data = json.load(handle)
 
             # ALTERNATIVE IMPLEMENTATIONS: Using YAML or XML to load data
@@ -33,6 +31,8 @@ class Database:
 
             # import xmltodict
             # self.data = xmltodict.parse(handle.read())["root"]
+            # print(self.data)
+
 
     def balance(self, acct_id):
         """
@@ -45,8 +45,19 @@ class Database:
         """
         acct = self.data.get(acct_id)
         if acct:
-            return int(acct["due"]) - int(acct["paid"])
+            bal = float(acct["due"]) - float(acct["paid"])
+
+            # Style added in module 4
+            return f"{bal:.2f} USD"
+
+            # Style added in module 3
+            # return f"$ {bal:.2f}"
+
+            # Original style in module 2
+            # return int(acct["due"]) - int(acct["paid"])
+
         return None
+
 
     def owes_money(self, acct_id):
         """
@@ -54,4 +65,8 @@ class Database:
         false if they are up to date on payments or have credit
         from a past overpayment.
         """
-        return self.balance(acct_id) > 0
+        acct = self.data.get(acct_id)
+        if acct:
+            return int(acct["due"]) - int(acct["paid"]) > 0
+
+        return None

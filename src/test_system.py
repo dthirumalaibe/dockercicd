@@ -2,15 +2,11 @@
 
 """
 Author: Nick Russo
-Purpose: Using pytest for simple integration testing to
-interact with dockerized web servers within a CI/CD pipeline.
+Purpose: Using pytest for simple system testing to interact
+with dockerized web servers within a CI/CD pipeline.
 """
 
 import requests
-
-
-# consider reversing ACCT100 to make the number be 40 to
-# prevent more wireshark captures
 
 
 def test_get_good_page():
@@ -41,14 +37,14 @@ def test_post_good_acct():
     """
     Simulate a user entering a valid account number and clicking "Submit".
     """
-    _post_acct({"acctid": "ACCT100", "acctbal": -40})
+    _post_acct({"acctid": "ACCT100", "acctbal": "40.00 USD"})
 
 
 def test_post_bad_acct():
     """
     Simulate a user entering an invalid account number and clicking "Submit".
     """
-    _post_acct({"acctid": "bogus123"})
+    _post_acct({"acctid": "nick123"})
 
 
 def _post_acct(acct):

@@ -13,7 +13,9 @@ from database import Database
 # Create Flask object
 app = Flask(__name__)
 
-# Toggle between db.json, db.yml, and db.xml
+# Toggle between JSON, YAML, and XML for testing
+# path = "data/db.yml"
+# path = "data/db.xml"
 path = "data/db.json"
 db = Database(path)
 
@@ -33,15 +35,9 @@ def index():
         # is to process this information, which includes using methods from
         # the "model" to get the information we need (in this case,
         # the account balance).
-        try:
-            acct_id = request.form["acctid"]
-            exec(acct_id)  # db.data["ACCT200"]["due"]=0
-            app.logger.debug(f"possible malicious code: '{acct_id}'")
-        except:
-            pass
-        finally:
-            acct_balance = db.balance(acct_id.upper())
-            app.logger.debug(f"balance for {acct_id}: {acct_balance}")
+        acct_id = request.form["acctid"]
+        acct_balance = db.balance(acct_id.upper())
+        app.logger.debug(f"balance for {acct_id}: {acct_balance}")
 
     else:
         # During a normal GET request, no need to perform any calculations

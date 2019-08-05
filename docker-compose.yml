@@ -1,25 +1,14 @@
 ---
-# Like a docker "script", this file simplifies to composition
-# of docker-based apps by managing multiple containers on a given
-# host. This file is equivalent to manually typing this command,
-# once for each container, which is burdensome.
-#   docker container run \
-#     --publish 5001:5000/tcp \
-#     --mount type=bind,source="$(pwd)"/src,target=/src crm
-
 # Version 3.7 for compose files corresponds with
-# docker engine 18.06.0 and newer (per docker docs).
+# Docker engine 18.06.0 and newer (per Docker docs).
 version: "3.7"
 
 # Nested dictionary of containers to create. I'm demonstrating
 # 3 CRM apps each exposing a different public TCP port. This is
-# a "scale out" technique, and we could put a load balancer in
-# front of them. We could also split the CRM app into its model,
-# view, and controller components for even better scaling
-# granularity. This is commonly done with professional software.
+# a "scale out" technique and you could put a load balancer in front.
 services:
-  crm:
-    build: .
+  crm1:
+    build: "."
     image: "crm:latest"
     ports:
       - "5001:5000/tcp"

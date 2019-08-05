@@ -19,13 +19,12 @@ install:
 before_script:
   - "pylint src/*.py"
   - "pytest --verbose src/test_unit.py"
-  - "docker-compose build"
   - "docker-compose up -d"
   - "docker ps"
 
-# Run the integration tests to ensure the web server is functional.
+# Run the system tests to ensure the web server is functional.
 script:
-  - "pytest --verbose src/test_integration.py"
+  - "pytest --verbose src/test_system.py"
 
 # Not completely necessary, but gracefully tear down containers.
 after_script:
