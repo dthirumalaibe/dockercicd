@@ -59,6 +59,13 @@ class Database:
         return None
 
 
+    def owes_money_stub(self, acct_id):
+        """
+        Not yet implemented (included for reference only)
+        """
+        pass
+
+
     def owes_money(self, acct_id):
         """
         Returns true if the account holder owes us money. Returns
