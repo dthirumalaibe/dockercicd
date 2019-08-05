@@ -10,7 +10,7 @@ python:
 services:
   - "docker"
 
-# Install required Python packages such as flask, pylint, and pytest.
+# Install required Python packages such as requests, pylint, and pytest.
 install:
   - "pip install -r requirements.txt"
 
