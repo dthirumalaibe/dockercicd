@@ -20,7 +20,7 @@ before_script:
   - "pylint src/*.py"
   - "pytest --verbose src/test_unit.py"
   - "docker-compose up -d"
-  - "docker ps"
+  - "docker container ls"
 
 # Run the system tests to ensure the web server is functional.
 script:
